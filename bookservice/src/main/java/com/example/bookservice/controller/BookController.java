@@ -4,6 +4,7 @@ import com.example.bookservice.model.Book;
 import com.example.bookservice.service.BookService;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,8 +31,15 @@ public class BookController {
     @GetMapping("/{title}")
     @Operation(summary = "Get book by title")
     public ResponseEntity<?> getBookByTitle(@PathVariable String title) {
-        return bookService.getBookByTitle(title);
+        ResponseEntity<?> responseEntity = bookService.getBookByTitle(title);
+        if (responseEntity.getStatusCode() == HttpStatus.NOT_FOUND) {
+            // Customize the response for book not found
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Book not found with title: " + title);
+        }
+        // Return the original response if the book is found
+        return responseEntity;
     }
+
 
     // Endpoint to add a new book
     @PostMapping("/add")
