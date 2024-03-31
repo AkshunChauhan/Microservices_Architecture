@@ -1,10 +1,10 @@
-package com.example.Microservices_Architecture;
+package com.example.orderservice;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class MicroservicesArchitectureApplicationTests {
+class OrderServiceApplicationTests {
 
 	@Test
 	void contextLoads() {
