@@ -18,10 +18,12 @@ public class BookService {
         this.bookRepository = bookRepository;
     }
 
+    // Method to retrieve all books
     public List<Book> getAllBooks() {
         return bookRepository.findAll();
     }
 
+    // Method to retrieve a book by its title
     public ResponseEntity<?> getBookByTitle(String title) {
         Book book = bookRepository.findByTitleIgnoreCase(title);
         if (book != null) {
@@ -31,7 +33,7 @@ public class BookService {
         }
     }
 
-
+    // Method to add a new book
     public ResponseEntity<?> addBook(Book book) {
         //check if the book title is empty
         if (book.getTitle() == null || book.getTitle().isEmpty()) {
@@ -45,6 +47,7 @@ public class BookService {
         return ResponseEntity.ok("Book Saved: \n"+ book);
     }
 
+    // Method to update an existing book
     public ResponseEntity<?> updateBook(int id, Book updatedBook) {
         Optional<Book> book = bookRepository.findById(id);
         if (book.isPresent()) {
@@ -67,6 +70,7 @@ public class BookService {
         }
     }
 
+    // Method to delete a book by its id
     public ResponseEntity<?> deleteBook(int id) {
         Optional<Book> optionalBook = bookRepository.findById(id);
         if (optionalBook.isPresent()) {

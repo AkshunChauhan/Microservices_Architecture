@@ -16,16 +16,18 @@ public class OrderController {
         this.orderService = orderService;
     }
 
+    // Endpoint to place a book order using title only
     @PostMapping("/book")
     @Operation(summary = "Placing book order using title only")
     public ResponseEntity<?> placeBookOrder(@RequestBody String bookTitle) {
         return orderService.placeBookOrder(bookTitle);
     }
 
+    // Endpoint to retrieve all book orders
     @GetMapping("/allorders")
-    @Operation(summary = "all book orders")
+    @Operation(summary = "Retrieve all books orders")
     public ResponseEntity<?> shopBooks() {
+        // Return the response body from the order service directly
         return ResponseEntity.ok(orderService.shopAll().getBody());
     }
-
 }
